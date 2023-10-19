@@ -1,13 +1,33 @@
-import { View, Text } from 'react-native'
+import { useState } from 'react'
+import { View, Text, FlatList } from 'react-native'
+import { Empty } from '../components/Empty'
 import { Header } from '../components/Header'
 import { Task } from '../components/Task'
+import { TaskDTO } from '../dtos/TaskDTO'
+import { uuid } from '../utils/uuid'
 import { styles } from './styles'
 
 export function HomeScreen() {
+    const [tasks, setTasks] =useState<TaskDTO[]>([])
+    const [newTask, setNewTask] = useState('')
+
+    function handleTaskAdd() {
+        if (newTask !== '' && newTask.length >= 5) {
+            setTasks((tasks) => [...tasks,
+                {id: uuid(), isCompleted: false, title: newTask.trim()}
+            ])
+        }
+        setNewTask('')
+    }
+
     return (
         <>
             <View style={styles.container}>
-                <Header />
+                <Header
+                    task={newTask}
+                    onChangeText={setNewTask}
+                    onPress={handleTaskAdd}
+                />
                 <View style={styles.tasksContainer} >
                     <View style={styles.info}>
                         <View style={styles.row}>
@@ -23,10 +43,19 @@ export function HomeScreen() {
                             </View>
                         </View>
                     </View>
-                    <Task title='Estudar React Native' isCompleted/>
-                    <Task title='Estudar React Native' isCompleted={false}/>
-                    <Task title='Estudar React Native' isCompleted/>
-                    <Task title='Estudar React Native' isCompleted/>
+
+                    <FlatList 
+                        data={tasks}
+                        keyExtractor={(tasks) => tasks.id!}
+                        renderItem={({item}) => (
+                            <Task
+                                key={item.id}
+                                isCompleted={item.isCompleted}
+                                title={item.title}
+                            />
+                        )}
+                        ListEmptyComponent={<Empty />}
+                    />
                 </View>
             </View>
         </>
