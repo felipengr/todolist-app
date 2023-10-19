@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
         fontSize: theme.font_size.md,
         borderColor: theme.colors.base.gray700,
         borderWidth: 1,
+        color: theme.colors.base.gray100,
     },
     button: {
         height: 54,
