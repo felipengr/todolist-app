@@ -1,6 +1,6 @@
 # ToDo List Mobile
 
-![ToDo List](./src//assets/img/Logo.png)
+![ToDo List](./src/assets/Logo@2x.png)
 
 Aplicação de controle de tarefas no estilo **to-do list**, que contém as seguintes funcionalidades:
 
