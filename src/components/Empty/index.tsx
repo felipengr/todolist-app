@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native";
+import React, { Image, Text, View } from "react-native";
 import clipboard from '../../assets/Clipboard.png'
 import { styles } from "./styles";
 
